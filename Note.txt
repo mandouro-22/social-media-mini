@@ -1,0 +1,6 @@
+  const { t, i18n } = useTranslation();
+
+  // تبديل اللغة بين الإنجليزية والعربية
+  const changeLanguage = (lng: "en" | "ar") => {
+    i18n.changeLanguage(lng);
+  };
