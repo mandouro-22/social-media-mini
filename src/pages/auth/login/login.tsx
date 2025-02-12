@@ -12,7 +12,10 @@ export default function Login() {
             <h1 className="text-center text-xl">Login to your account</h1>
             <form action="">
               <div className="flex flex-col gap-y-2">
-                <input type="text" />
+                <input
+                  type="text"
+                  className="bg-white text-black rounded-md px-3 py-1"
+                />
                 <input type="text" />
               </div>
             </form>
