@@ -48,6 +48,7 @@ export default function Login() {
               src={logo}
               alt="logo"
               className="w-48 mx-auto md:w-96 object-cover"
+              loading="lazy"
             />
           </div>
           <div className="flex items-center flex-col">
