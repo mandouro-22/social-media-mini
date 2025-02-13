@@ -57,7 +57,8 @@ export default function Login() {
             </h1>
             <form
               onSubmit={formik.handleSubmit}
-              className="mt-8 mb-4 w-full md:w-[85%]">
+              className="mt-8 mb-4 w-full md:w-[85%]"
+            >
               {/* ✅ Email or Phone Input */}
               <div className="flex flex-col">
                 <label htmlFor="emailOrPhone" className="text-lg mb-2">
@@ -106,16 +107,7 @@ export default function Login() {
                 )}
               </div>
 
-              {/* ✅ Forgot Password */}
-              <div className="w-fit">
-                <Link to="/">
-                  <p className="mt-3 text-sm text-gray-600 hover:underline hover:text-gray-800">
-                    {t("Forgot Password?")}
-                  </p>
-                </Link>
-              </div>
-
-              {/* ✅ Submit Button */}
+              {/* ✅ Login Button */}
               <div className="w-full">
                 <Button
                   name={t("Login")}
@@ -123,6 +115,25 @@ export default function Login() {
                   loading={loading}
                   className="w-full my-4 py-2.5 bg-[#19385c] hover:bg-[#122a46] flex items-center justify-center transition-colors duration-200 text-white rounded-md cursor-pointer"
                 />
+              </div>
+
+              <div className="flex items-center justify-between">
+                {/* ✅ Forgot Password */}
+                <div className="w-fit">
+                  <Link to="/">
+                    <p className=" text-sm text-gray-600 hover:underline hover:text-gray-800">
+                      {t("Forgot Password?")}
+                    </p>
+                  </Link>
+                </div>
+
+                {/* ✅ Register Button */}
+                <div className="w-fit flex items-center gap-1 text-sm text-gray-600">
+                  <span>{t("Create Account")}</span>
+                  <Link to="/">
+                    <p className="underline hover:text-gray-800">SignUp</p>
+                  </Link>
+                </div>
               </div>
             </form>
           </div>
