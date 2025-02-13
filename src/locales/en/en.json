@@ -2,6 +2,13 @@
   "Login in to your account": "Login in to your account",
   "Login": "Login",
   "Password": "Password",
-  "Email or Phone Number": "Email or Phone Number",
-  "Email Address or Phone Number": "Email Address or Phone Number"
+  "Email": "Email",
+  "Email Address": "Email Address or Phone Number",
+
+  "This field is required": "This field is required",
+  "Invalid email": "Invalid email",
+  "Password must be at least 6 characters": "Password must be at least 6 characters",
+  "Forgot Password?": "Forgot Password?",
+  "Create Account": "Create Account",
+  "SignUp": "SignUp"
 }

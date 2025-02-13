@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "../pages/auth/login/login";
 import ErrorPage from "../pages/error/errorPage";
+import { ForgetPassword, Login, SignUp } from "../pages/auth";
 
 export function Pages() {
   const language = localStorage.getItem("i18nextLng");
@@ -11,6 +11,8 @@ export function Pages() {
         dir={language === "ar" ? "rtl" : "ltr"}>
         <Routes>
           <Route path="/" element={<Login />} />
+          <Route path="/register" element={<SignUp />} />
+          <Route path="/forgetPassword" element={<ForgetPassword />} />
           {/* error page */}
           <Route path="*" element={<ErrorPage />} />
         </Routes>
