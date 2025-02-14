@@ -72,7 +72,8 @@ export default function Login() {
             </h1>
             <form
               onSubmit={formik.handleSubmit}
-              className="mt-8 mb-4 w-full md:w-[85%]">
+              className="mt-8 mb-4 w-full md:w-[85%]"
+            >
               <div className="flex flex-col">
                 <label htmlFor="email" className="text-lg mb-2">
                   {t("Email")}
@@ -142,7 +143,7 @@ export default function Login() {
                   <span>{t("Create Account")}</span>
                   <Link to="/register">
                     <p className="underline hover:text-gray-800">
-                      {t("SignUp")}
+                      {t("Sign Up")}
                     </p>
                   </Link>
                 </div>

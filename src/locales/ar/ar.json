@@ -9,5 +9,22 @@
   "Password must be at least 6 characters": "يجب أن تكون كلمة المرور على الأقل 6 أحرف",
   "Forgot Password?": "هل نسيت كلمة المرور؟",
   "Create Account": "إنشاء حساب",
-  "SignUp": "'سجل'"
+  "First Name": "الاسم الأول",
+  "Last Name": "الاسم الأخير",
+  "Date of Birth": "تاريخ الميلاد",
+  "Gender": "الجنس",
+  "Male": "ذكر",
+  "Female": "أنثى",
+  "Confirm Password": "تأكيد كلمة المرور",
+  "Sign Up": "تسجيل",
+  "FirstName Required": "الاسم الأول مطلوب",
+  "LastName Required": "الاسم الاخير مطلوب",
+  "Invalid Gender": "اختيار الجنس غير صحيح",
+  "Gender Required": "الجنس مطلوب",
+  "Invalid Email": "تنسيق البريد الإلكتروني غير صحيح",
+  "Email Required": "البريد الإلكتروني مطلوب",
+  "Password must be at least 8 characters": "يجب أن تكون كلمة المرور 8 أحرف على الأقل",
+  "Password Required": "كلمة المرور مطلوبة",
+  "Password Mis Match": "كلمتا المرور غير متطابقتين",
+  "Confirm Password Required": "تأكيد كلمة المرور مطلوب"
 }

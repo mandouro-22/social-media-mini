@@ -7,7 +7,7 @@ export function Pages() {
   return (
     <Router>
       <div
-        className="bg-[#f1f1f1] w-full min-h-screen"
+        className="bg-[#f1f1f1] w-full min-h-screen py-3 px-2 h-full"
         dir={language === "ar" ? "rtl" : "ltr"}
       >
         <Routes>
