@@ -7,8 +7,9 @@ export function Pages() {
   return (
     <Router>
       <div
-        className="bg-[#f1f1f1] w-full h-screen"
-        dir={language === "ar" ? "rtl" : "ltr"}>
+        className="bg-[#f1f1f1] w-full min-h-screen"
+        dir={language === "ar" ? "rtl" : "ltr"}
+      >
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<SignUp />} />
