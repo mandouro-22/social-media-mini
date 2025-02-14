@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ErrorPage from "../pages/error/errorPage";
-import { ForgetPassword, Login, SignUp } from "../pages/auth";
+import { ForgetPassword, Login, SignUp, Verify } from "../pages/auth";
 
 export function Pages() {
   const language = localStorage.getItem("i18nextLng");
@@ -14,6 +14,8 @@ export function Pages() {
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<SignUp />} />
           <Route path="/forgetPassword" element={<ForgetPassword />} />
+          <Route path="/verify" element={<Verify />} />
+          <Route path="/forgetPassword/verify" element={<Verify />} />
           {/* error page */}
           <Route path="*" element={<ErrorPage />} />
         </Routes>
