@@ -1,45 +1,25 @@
 import { useState, useRef } from "react";
 import { useFormik } from "formik";
-import * as Yup from "yup";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Button } from "../../../components/common";
 import logo from "../../../assets/imgs/logo.png";
-
-interface InitialValues {
-  email: string;
-  password: string;
-}
+import { LoginSchema } from "../../../validation";
+import { LoginValues } from "../../../types/auth";
 
 export default function Login() {
   const { t } = useTranslation();
   const isSubmitting = useRef(false);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const validationSchema = Yup.object({
-    email: Yup.string()
-      .trim()
-      .required(t("This field is required"))
-      .test("email", t("Invalid email"), (value) => {
-        if (!value) return false;
-        const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-        const isPhone = /^[0-9]{1,15}$/.test(value);
-        return isEmail || isPhone;
-      }),
-    password: Yup.string()
-      .trim()
-      .required(t("This field is required"))
-      .min(8, t("Password must be at least 8 characters")),
-  });
-
-  const initialValues: InitialValues = {
+  const initialValues: LoginValues = {
     email: "",
     password: "",
   };
 
   const formik = useFormik({
     initialValues,
-    validationSchema,
+    validationSchema: LoginSchema(t),
     onSubmit: (values) => {
       if (isSubmitting.current) return;
       isSubmitting.current = true;
@@ -47,10 +27,6 @@ export default function Login() {
       console.log("Form submitted");
       setLoading(true);
       console.log("Login Data:", values);
-
-      // setTimeout(() => {
-      //   isSubmitting.current = false;
-      // }, 2000);
     },
   });
 
@@ -72,8 +48,7 @@ export default function Login() {
             </h1>
             <form
               onSubmit={formik.handleSubmit}
-              className="mt-8 mb-4 w-full md:w-[85%]"
-            >
+              className="mt-8 mb-4 w-full md:w-[85%]">
               <div className="flex flex-col">
                 <label htmlFor="email" className="text-lg mb-2">
                   {t("Email")}

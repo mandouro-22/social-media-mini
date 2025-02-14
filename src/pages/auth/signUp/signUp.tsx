@@ -4,18 +4,9 @@ import logo from "../../../assets/imgs/logo.png";
 import { signUpSchema } from "../../../validation";
 import { Button } from "../../../components/common";
 import { useState } from "react";
+import { SignUpValues } from "../../../types/auth";
 
-interface InitialValues {
-  firstName: string;
-  lastName: string;
-  dateOfBirth: string;
-  gender: "male" | "female";
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
-
-const initialValues: InitialValues = {
+const initialValues: SignUpValues = {
   firstName: "",
   lastName: "",
   dateOfBirth: "",
@@ -40,25 +31,24 @@ export default function SignUp() {
   });
   return (
     <section>
-      <div className="container mx-auto px-2 py-4">
-        <div className="grid lg:grid-cols-2 grid-cols-1 gap-10 lg:gap-4 h-screen place-content-center">
-          <div className="w-full max-sm:my-6 hidden sm:flex items-center justify-center ">
+      <div className="container mx-auto px-2">
+        <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 md:h-[90vh] md:place-content-center">
+          <div className="w-full max-sm:my-6 hidden lg:flex items-center justify-center">
             <img
               src={logo}
               alt="logo"
-              className="w-48 mx-auto md:w-96 object-cover"
+              className="w-48 mx-auto md:w-72 lg:w-96 object-cover"
               loading="lazy"
             />
           </div>
-          <div className="w-full max-sm:my-6 flex items-center justify-center py-6">
-            <div className="flex items-center flex-col max-sm:w-full">
+          <div className="w-full max-sm:my-6 flex items-center justify-center">
+            <div className="flex items-center flex-col max-sm:w-full w-[90%]">
               <h1 className="text-center text-2xl md:text-4xl font-semibold">
                 {t("Create Account")}
               </h1>
               <form
                 onSubmit={formik.handleSubmit}
-                className="mt-8 mb-4 w-full md:w-[85%]"
-              >
+                className="mt-8 mb-4 w-full md:w-[85%]">
                 <div className="flex max-sm:flex-col items-center gap-4 mb-4">
                   <div className="flex flex-col w-full">
                     <label className="mb-1 font-semibold">

@@ -27,5 +27,6 @@
   "Password must be at least 8 characters": "Password must be at least 8 characters",
   "Password Required": "Password is required",
   "Password Mis Match": "Passwords do not match",
-  "Confirm Password Required": "Confirm password is required"
+  "Confirm Password Required": "Confirm password is required",
+  "Cannot be spaces only": "Cannot be spaces only"
 }

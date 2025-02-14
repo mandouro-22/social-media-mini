@@ -27,5 +27,6 @@
   "Password must be at least 8 characters": "يجب أن تكون كلمة المرور 8 أحرف على الأقل",
   "Password Required": "كلمة المرور مطلوبة",
   "Password Mis Match": "كلمتا المرور غير متطابقتين",
-  "Confirm Password Required": "تأكيد كلمة المرور مطلوب"
+  "Confirm Password Required": "تأكيد كلمة المرور مطلوب",
+  "Cannot be spaces only": "لا يمكن أن تكون مسافات فقط"
 }
