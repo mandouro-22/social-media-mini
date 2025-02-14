@@ -40,7 +40,7 @@ export default function SignUp() {
   });
   return (
     <section>
-      <div className="container mx-auto px-2 max-sm:py-12 py-4">
+      <div className="container mx-auto px-2 py-4">
         <div className="grid lg:grid-cols-2 grid-cols-1 gap-10 lg:gap-4 h-screen place-content-center">
           <div className="w-full max-sm:my-6 hidden sm:flex items-center justify-center ">
             <img
