@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
 import { SignUpValues } from "../../types/auth";
 import { apiClient } from "../../config/axiosConfig";
