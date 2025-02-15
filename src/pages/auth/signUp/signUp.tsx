@@ -5,12 +5,15 @@ import { signUpSchema } from "../../../validation";
 import { Button } from "../../../components/common";
 import { useState } from "react";
 import { SignUpValues } from "../../../types/auth";
+import { useSignup } from "../../../hooks";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const initialValues: SignUpValues = {
   firstName: "",
   lastName: "",
-  dateOfBirth: "",
-  gender: "male",
+  birthdate: "",
+  gender: "Male",
   email: "",
   password: "",
   confirmPassword: "",
@@ -18,15 +21,29 @@ const initialValues: SignUpValues = {
 
 export default function SignUp() {
   const [loading, setLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const mutation = useSignup();
   const { t } = useTranslation();
   const formik = useFormik({
     initialValues,
     validationSchema: () => signUpSchema(t),
     onSubmit: (values) => {
-      // handle form submission
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { confirmPassword, ...formData } = values;
       setLoading(true);
-      console.log(values);
-      setLoading(false);
+      mutation.mutate(formData, {
+        onSuccess: () => {
+          setLoading(false);
+          navigate("/");
+          toast.success(t("Account Created Successfully"));
+        },
+        onError: (error) => {
+          setLoading(false);
+          console.error(error.message);
+          toast.error(t("Something went wrong"));
+        },
+      });
+      console.log(formData);
     },
   });
   return (
@@ -103,17 +120,17 @@ export default function SignUp() {
                   <input
                     type="date"
                     className={`bg-gray-200 text-black rounded-md p-2.5 text-sm border ${
-                      formik.errors.dateOfBirth && formik.touched.dateOfBirth
+                      formik.errors.birthdate && formik.touched.birthdate
                         ? "border-red-500"
                         : "border-gray-300"
                     } outline-0`}
-                    {...formik.getFieldProps("dateOfBirth")}
-                    name="dateOfBirth"
+                    {...formik.getFieldProps("birthdate")}
+                    name="birthdate"
                     placeholder={t("Date Of Brith")}
                   />
-                  {formik.touched.dateOfBirth && formik.errors.dateOfBirth && (
+                  {formik.touched.birthdate && formik.errors.birthdate && (
                     <div className="text-red-500 text-sm">
-                      {formik.errors.dateOfBirth}
+                      {formik.errors.birthdate}
                     </div>
                   )}
                 </div>
@@ -127,8 +144,8 @@ export default function SignUp() {
                         <input
                           type="radio"
                           name="gender"
-                          value="male"
-                          checked={formik.values.gender === "male"}
+                          value="Male"
+                          checked={formik.values.gender === "Male"}
                           onChange={formik.handleChange}
                           className="ltr:mr-2 rtl:ml-2 peer-checked:bg-blue-800 focus:bg-blue-800"
                         />
@@ -138,8 +155,8 @@ export default function SignUp() {
                         <input
                           type="radio"
                           name="gender"
-                          value="female"
-                          checked={formik.values.gender === "female"}
+                          value="Female"
+                          checked={formik.values.gender === "Female"}
                           onChange={formik.handleChange}
                           className="ltr:mr-2 rtl:ml-2 peer-checked:bg-blue-800 focus:bg-blue-800"
                         />

@@ -28,5 +28,8 @@
   "Password Required": "كلمة المرور مطلوبة",
   "Password Mis Match": "كلمتا المرور غير متطابقتين",
   "Confirm Password Required": "تأكيد كلمة المرور مطلوب",
-  "Cannot be spaces only": "لا يمكن أن تكون مسافات فقط"
+  "Cannot be spaces only": "لا يمكن أن تكون مسافات فقط",
+  "Date of birth cannot be in the future": "لا يجوز أن يكون تاريخ الميلاد في المستقبل",
+  "You must be at least 12 years old": "يجب أن يكون عمرك 12 عامًا على الأقل",
+  "Date of Birth Required": "تاريخ الميلاد مطلوب"
 }

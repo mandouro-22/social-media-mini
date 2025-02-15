@@ -6,11 +6,11 @@ export type LoginValues = {
 export type SignUpValues = {
   firstName: string;
   lastName: string;
-  dateOfBirth: string;
-  gender: "male" | "female";
+  birthdate: string;
+  gender: "Male" | "Female";
   email: string;
   password: string;
-  confirmPassword: string;
+  confirmPassword?: string;
 };
 
 export type VerifyValues = {

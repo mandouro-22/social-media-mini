@@ -15,8 +15,8 @@ export const signUpSchema = (t: any) => {
       .test("no-spaces-only", t("Cannot be spaces only"), (value) =>
         value ? value.trim().length > 0 : false
       ),
-    gender: Yup.mixed<"male" | "female">()
-      .oneOf(["male", "female"], t("Invalid Gender"))
+    gender: Yup.mixed<"Male" | "Female">()
+      .oneOf(["Male", "Female"], t("Invalid Gender"))
       .required(t("Gender Required")),
     email: Yup.string()
       .email(t("Invalid Email"))
@@ -24,6 +24,16 @@ export const signUpSchema = (t: any) => {
       .test("no-spaces-only", t("Cannot be spaces only"), (value) =>
         value ? value.trim().length > 0 : false
       ),
+    birthdate: Yup.date()
+      .max(new Date(), t("Date of birth cannot be in the future"))
+      .test("age-check", t("You must be at least 12 years old"), (value) => {
+        if (!value) return false;
+        const today = new Date();
+        const minDate = new Date();
+        minDate.setFullYear(today.getFullYear() - 12);
+        return value <= minDate;
+      })
+      .required(t("Date of Birth Required")),
     password: Yup.string()
       .min(8, t("Password must be at least 8 characters"))
       .required(t("Password Required"))
