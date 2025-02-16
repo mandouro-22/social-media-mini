@@ -1,6 +1,5 @@
 import { Pages } from "./routers/routes";
 import { ToastContainer } from "react-toastify";
-
 function App() {
   return (
     <>

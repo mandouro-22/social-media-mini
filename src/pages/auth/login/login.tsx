@@ -7,11 +7,16 @@ import logo from "../../../assets/imgs/logo.png";
 import { LoginSchema } from "../../../validation";
 import { LoginValues } from "../../../types/auth";
 
+import { GoogleLogin } from "@react-oauth/google";
+
 export default function Login() {
   const { t } = useTranslation();
   const isSubmitting = useRef(false);
   const [loading, setLoading] = useState<boolean>(false);
 
+  // const login = useGoogleLogin({
+  //   onSuccess: (tokenResponse) => console.log(tokenResponse),
+  // });
   const initialValues: LoginValues = {
     email: "",
     password: "",
@@ -46,9 +51,20 @@ export default function Login() {
             <h1 className="text-center text-2xl md:text-4xl font-semibold">
               {t("Login in to your account")}
             </h1>
+            <div className="mt-4">
+              <GoogleLogin
+                onSuccess={(credentialResponse) => {
+                  console.log(credentialResponse.credential);
+                }}
+                onError={() => {
+                  console.log("Login Failed");
+                }}
+              />
+            </div>
             <form
               onSubmit={formik.handleSubmit}
-              className="mt-8 mb-4 w-full md:w-[85%]">
+              className="mt-4 mb-4 w-full md:w-[85%]"
+            >
               <div className="flex flex-col">
                 <label htmlFor="email" className="text-lg mb-2">
                   {t("Email")}
