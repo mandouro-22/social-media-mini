@@ -54,7 +54,7 @@ export default function Login() {
             <div className="mt-4">
               <GoogleLogin
                 onSuccess={(credentialResponse) => {
-                  console.log(credentialResponse.credential);
+                  console.log(credentialResponse);
                 }}
                 onError={() => {
                   console.log("Login Failed");
