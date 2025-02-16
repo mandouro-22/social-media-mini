@@ -7,16 +7,33 @@ import logo from "../../../assets/imgs/logo.png";
 import { LoginSchema } from "../../../validation";
 import { LoginValues } from "../../../types/auth";
 
-import { GoogleLogin } from "@react-oauth/google";
+import { useGoogleLogin } from "@react-oauth/google";
 
 export default function Login() {
   const { t } = useTranslation();
   const isSubmitting = useRef(false);
   const [loading, setLoading] = useState<boolean>(false);
 
-  // const login = useGoogleLogin({
-  //   onSuccess: (tokenResponse) => console.log(tokenResponse),
-  // });
+  const login = useGoogleLogin({
+    scope:
+      "openid profile email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/user.birthday.read https://www.googleapis.com/auth/user.gender.read",
+    onSuccess: async (tokenResponse) => {
+      console.log("Token Response:", tokenResponse);
+
+      // طلب بيانات المستخدم من Google People API
+      const userProfile = await fetch(
+        "https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses,genders,birthdays",
+        {
+          headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+        }
+      );
+
+      const userData = await userProfile.json();
+      console.log("User Data:", userData);
+    },
+    onError: (error) => console.error("Login Failed:", error),
+  });
+
   const initialValues: LoginValues = {
     email: "",
     password: "",
@@ -52,19 +69,16 @@ export default function Login() {
               {t("Login in to your account")}
             </h1>
             <div className="mt-4">
-              <GoogleLogin
-                onSuccess={(credentialResponse) => {
-                  console.log(credentialResponse);
-                }}
-                onError={() => {
-                  console.log("Login Failed");
-                }}
-              />
+              {/* <GoogleLogin
+                onSuccess={handleLogin}
+                onError={() => console.log("Login Failed")}
+                useOneTap
+              /> */}
+              <button onClick={() => login()}>Sign in with Google 🚀</button>
             </div>
             <form
               onSubmit={formik.handleSubmit}
-              className="mt-4 mb-4 w-full md:w-[85%]"
-            >
+              className="mt-4 mb-4 w-full md:w-[85%]">
               <div className="flex flex-col">
                 <label htmlFor="email" className="text-lg mb-2">
                   {t("Email")}

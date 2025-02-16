@@ -1,6 +1,1 @@
-  const { t, i18n } = useTranslation();
-
-  // تبديل اللغة بين الإنجليزية والعربية
-  const changeLanguage = (lng: "en" | "ar") => {
-    i18n.changeLanguage(lng);
-  };
+"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile openid"
