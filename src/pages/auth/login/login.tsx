@@ -6,33 +6,34 @@ import { Button } from "../../../components/common";
 import logo from "../../../assets/imgs/logo.png";
 import { LoginSchema } from "../../../validation";
 import { LoginValues } from "../../../types/auth";
+import GoogleLoginButton from "../../../components/GoogleBtn/GoogleLoginButton ";
 
-import { useGoogleLogin } from "@react-oauth/google";
+// import { useGoogleLogin } from "@react-oauth/google";
 
 export default function Login() {
   const { t } = useTranslation();
   const isSubmitting = useRef(false);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const login = useGoogleLogin({
-    scope:
-      "openid profile email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/user.birthday.read https://www.googleapis.com/auth/user.gender.read",
-    onSuccess: async (tokenResponse) => {
-      console.log("Token Response:", tokenResponse);
+  // const login = useGoogleLogin({
+  //   scope:
+  //     "openid profile email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/user.birthday.read https://www.googleapis.com/auth/user.gender.read",
+  //   onSuccess: async (tokenResponse) => {
+  //     console.log("Token Response:", tokenResponse);
 
-      // طلب بيانات المستخدم من Google People API
-      const userProfile = await fetch(
-        "https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses,genders,birthdays",
-        {
-          headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
-        }
-      );
+  //     // طلب بيانات المستخدم من Google People API
+  //     const userProfile = await fetch(
+  //       "https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses,genders,birthdays",
+  //       {
+  //         headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+  //       }
+  //     );
 
-      const userData = await userProfile.json();
-      console.log("User Data:", userData);
-    },
-    onError: (error) => console.error("Login Failed:", error),
-  });
+  //     const userData = await userProfile.json();
+  //     console.log("User Data:", userData);
+  //   },
+  //   onError: (error) => console.error("Login Failed:", error),
+  // });
 
   const initialValues: LoginValues = {
     email: "",
@@ -74,7 +75,8 @@ export default function Login() {
                 onError={() => console.log("Login Failed")}
                 useOneTap
               /> */}
-              <button onClick={() => login()}>Sign in with Google 🚀</button>
+              {/* <button onClick={() => login()}>Sign in with Google 🚀</button> */}
+              <GoogleLoginButton />
             </div>
             <form
               onSubmit={formik.handleSubmit}
