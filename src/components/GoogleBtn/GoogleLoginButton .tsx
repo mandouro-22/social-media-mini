@@ -1,65 +1,36 @@
-// import { useGoogleLogin } from "@react-oauth/google";
-// import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
-// import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function GoogleLoginButton() {
-  // const navigate = useNavigate();
+  // const clientId =
+  //   "94142909577-8qav3d7hpcms630ej23g1d86rurcvqun.apps.googleusercontent.com";
+  // const backendRedirectUri =
+  //   "https://delightful-shelli-social-media-app-437a3548.koyeb.app/api/auth/google/callback"; // Backend Route
 
-  // Mutation معدلة لإرسال التوكين
-  //   const { mutate, isPending } = useMutation({
-  //     mutationFn: async () => {
-  //       const response = await axios.get(
-  //         "https://delightful-shelli-social-media-app-437a3548.koyeb.app/api/auth/google/callback"
-  //       );
-  //       return response.data;
-  //     },
-  //     onSuccess: (data) => {
-  //       console.log(data);
-  //     },
-  //     onError: (error) => {
-  //       console.error("Error:", error);
-  //     },
-  //   });
+  // const loginWithGoogle = async () => {
+  //   const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${encodeURIComponent(
+  //     backendRedirectUri
+  //   )}&response_type=code&scope=openid%20profile%20email`;
 
-  // استخدام useGoogleLogin الصحيح
-  //   const googleLogin = useGoogleLogin({
-  //     onSuccess: (response) => {
-  //       mutate(response?.access_token);
-  //     },
-  //     onError: (error) => console.error("Google Login Failed:", error),
-  //   });
+  //   window.location.href = googleAuthUrl;
+  // };
 
-  const login = async () => {
-    const fetch = await axios.get(
-      "https://delightful-shelli-social-media-app-437a3548.koyeb.app/api/auth/google/callback"
-    );
-    // navigate(fetch.data);
-    console.log(fetch.data);
-    return fetch.data;
-    // console.log(fetch.data);
+  const loginWithGoogle = () => {
+    window.location.href =
+      "https://delightful-shelli-social-media-app-437a3548.koyeb.app/api/auth/google/callback";
   };
 
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get("access_token");
+    const code = urlParams.get("code");
+    console.log(urlParams);
+    console.log(token);
+    console.log(code);
+  });
+
   return (
-    <button
-      onClick={login} // تشغيل عملية جوجل
-      //   disabled={isPending}
-      className="...">
-      {/* {isPending ? "Loading..." : "Sign in with Google 🚀"} */}
+    <button onClick={() => loginWithGoogle()} className="">
       Sign in with Google
     </button>
   );
 }
-
-//   // دالة تسجيل الدخول عبر Google
-//   const googleLogin = useGoogleLogin({
-//     scope:
-//       "openid profile email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/user.birthday.read https://www.googleapis.com/auth/user.gender.read",
-//     onSuccess: (tokenResponse) => {
-//       console.log("Google Token:", tokenResponse);
-//         mutate(tokenResponse.access_token);
-//     },
-//     onError: (error) => {
-//       console.error("Google Login Failed:", error);
-//     },
-//   });
