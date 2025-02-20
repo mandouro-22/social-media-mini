@@ -7,6 +7,7 @@ import {
   SignUp,
   Verify,
 } from "../pages/auth";
+import SignUpWithGoogle from "../components/signUpWithGoogle/signUpWithGoogle";
 
 export function Pages() {
   const language = localStorage.getItem("i18nextLng");
@@ -18,6 +19,7 @@ export function Pages() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<SignUp />} />
+          <Route path="/register-with-google" element={<SignUpWithGoogle />} />
           <Route path="/forgetPassword" element={<ForgetPassword />} />
           <Route path="/verify" element={<Verify />} />
           <Route path="/forgetPassword/verify" element={<Verify />} />

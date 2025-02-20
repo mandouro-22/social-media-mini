@@ -43,7 +43,6 @@ export default function SignUp() {
           toast.error(t("Something went wrong"));
         },
       });
-      console.log(formData);
     },
   });
   return (
