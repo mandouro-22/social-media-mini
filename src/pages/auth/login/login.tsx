@@ -1,12 +1,14 @@
 import { useState, useRef } from "react";
 import { useFormik } from "formik";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../../../components/common";
 import logo from "../../../assets/imgs/logo.png";
 import { LoginSchema } from "../../../validation";
 import { LoginValues } from "../../../types/auth";
 import GoogleLoginButton from "../../../components/GoogleBtn/GoogleLoginButton ";
+import { useLogin } from "../../../hooks/useLogin/useLogin";
+import { toast } from "react-toastify";
 
 // import { useGoogleLogin } from "@react-oauth/google";
 
@@ -14,6 +16,7 @@ export default function Login() {
   const { t } = useTranslation();
   const isSubmitting = useRef(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   // const login = useGoogleLogin({
   //   scope:
@@ -40,13 +43,29 @@ export default function Login() {
     password: "",
   };
 
+  const mutation = useLogin(initialValues);
+
   const formik = useFormik({
     initialValues,
     validationSchema: LoginSchema(t),
     onSubmit: (values) => {
       if (isSubmitting.current) return;
       isSubmitting.current = true;
-
+      mutation.mutate(values, {
+        onSuccess: (res) => {
+          isSubmitting.current = false;
+          setLoading(false);
+          formik.resetForm();
+          toast.success(t("Login successful"));
+          localStorage.setItem("user", JSON.stringify(res));
+          navigate("/");
+        },
+        onError: (error) => {
+          isSubmitting.current = false;
+          setLoading(false);
+          console.error("Error:", error);
+        },
+      });
       console.log("Form submitted");
       setLoading(true);
       console.log("Login Data:", values);

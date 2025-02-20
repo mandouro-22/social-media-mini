@@ -23,7 +23,7 @@ const initialValues: SignUpValues = {
 export default function SignUp() {
   const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
-  const mutation = useSignup();
+  const mutation = useSignup(initialValues);
   const { t } = useTranslation();
   const formik = useFormik({
     initialValues,

@@ -7,8 +7,9 @@ const sendData = async (data: SignUpValues): Promise<SignUpValues> => {
   return response.data;
 };
 
-export const useSignup = () => {
+export const useSignup = (data: SignUpValues) => {
   return useMutation<SignUpValues, Error, SignUpValues>({
+    mutationKey: ["sign-up", data],
     mutationFn: sendData,
   });
 };
