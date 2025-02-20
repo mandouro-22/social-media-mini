@@ -80,10 +80,11 @@ export default function SignUpWithGoogle() {
 
       setLoading(true);
       mutation.mutate(sendData, {
-        onSuccess: () => {
+        onSuccess: (res) => {
           setLoading(false);
           navigate("/");
           toast.success(t("Account Created Successfully"));
+          localStorage.setItem("user", JSON.stringify(res));
         },
         onError: () => {
           setLoading(false);
