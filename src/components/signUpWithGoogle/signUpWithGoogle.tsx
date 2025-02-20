@@ -3,11 +3,18 @@ import logo from "../../assets/imgs/logo.png";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { Button } from "../common";
+import { useEffect, useState } from "react";
 // import { useState } from "react";
 
 interface SignUpFormValues {
   birthdate: string;
   gender: "Male" | "Female";
+}
+
+interface GetDataFromUseParams {
+  firstName: string;
+  lastName: string;
+  email: string;
 }
 
 const initialValues: SignUpFormValues = {
@@ -18,6 +25,23 @@ const initialValues: SignUpFormValues = {
 export default function SignUpWithGoogle() {
   //   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
+  const [formData, setFormData] = useState<GetDataFromUseParams>({
+    firstName: "",
+    lastName: "",
+    email: "",
+  });
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const email = searchParams.get("email");
+    const firstName = searchParams.get("firstName");
+    const lastName = searchParams.get("lastName");
+    if (email && firstName && lastName) {
+      setFormData({ firstName: firstName, lastName: lastName, email: email });
+    }
+  }, [formData]);
+
+  console.log(formData);
 
   const formik = useFormik({
     initialValues,
