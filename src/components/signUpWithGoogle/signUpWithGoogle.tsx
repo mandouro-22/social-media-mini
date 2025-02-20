@@ -23,14 +23,16 @@ export default function SignUpWithGoogle() {
     initialValues,
     validationSchema: Yup.object({
       birthdate: Yup.date()
-        .max(new Date(), t("Date of birth cannot be in the future"))
+        .nullable() // تأكد من أنه يمكن أن يكون فارغًا بدون خطأ
         .test("age-check", t("You must be at least 12 years old"), (value) => {
-          if (!value) return false;
+          if (!value) return false; // تأكد من وجود قيمة
           const today = new Date();
           const minDate = new Date();
           minDate.setFullYear(today.getFullYear() - 12);
           return value <= minDate;
-        }),
+        })
+        .max(new Date(), t("Date of birth cannot be in the future")),
+
       gender: Yup.mixed<"Male" | "Female">()
         .oneOf(["Male", "Female"], t("Invalid Gender"))
         .required(t("Gender Required")),

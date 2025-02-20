@@ -7,16 +7,12 @@ import "./locales/i18n.ts";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
-// react query
 const queeryClient = new QueryClient();
-// 1024532969830-6r9826loqvct34be4eu52qbca8pt0us2.apps.googleusercontent.com
-
-// backend
-// 94142909577-8qav3d7hpcms630ej23g1d86rurcvqun.apps.googleusercontent.com
+const Client_ID = import.meta.env.VITE_APP_CLINET_ID_USED;
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryClientProvider client={queeryClient}>
-      <GoogleOAuthProvider clientId="1024532969830-6r9826loqvct34be4eu52qbca8pt0us2.apps.googleusercontent.com">
+      <GoogleOAuthProvider clientId={Client_ID}>
         <App />
       </GoogleOAuthProvider>
       <ReactQueryDevtools initialIsOpen={false} />
