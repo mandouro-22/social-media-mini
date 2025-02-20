@@ -69,13 +69,7 @@ export default function Login() {
             <h1 className="text-center text-2xl md:text-4xl font-semibold">
               {t("Login in to your account")}
             </h1>
-            <div className="mt-4">
-              {/* <GoogleLogin
-                onSuccess={handleLogin}
-                onError={() => console.log("Login Failed")}
-                useOneTap
-              /> */}
-              {/* <button onClick={() => login()}>Sign in with Google 🚀</button> */}
+            <div className="mt-4 border border-gray-300 px-6 py-2 rounded-md hover:bg-gray-300 cursor-pointer">
               <GoogleLoginButton />
             </div>
             <form

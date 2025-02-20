@@ -8,6 +8,7 @@ import { SignUpValues } from "../../../types/auth";
 import { useSignup } from "../../../hooks";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import GoogleLoginButton from "../../../components/GoogleBtn/GoogleLoginButton ";
 
 const initialValues: SignUpValues = {
   firstName: "",
@@ -62,6 +63,9 @@ export default function SignUp() {
               <h1 className="text-center text-2xl md:text-4xl font-semibold">
                 {t("Create Account")}
               </h1>
+              <div className="mt-4 border border-gray-300 px-6 py-2 rounded-md hover:bg-gray-300 cursor-pointer">
+                <GoogleLoginButton />
+              </div>
               <form
                 onSubmit={formik.handleSubmit}
                 className="mt-8 mb-4 w-full md:w-[85%]">

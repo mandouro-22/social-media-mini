@@ -43,31 +43,26 @@ export default function SignUpWithGoogle() {
     if (email && firstName && lastName) {
       setFormData({ firstName: firstName, lastName: lastName, email: email });
     }
-
-    console.log(formData);
   }, [formData.email, formData.firstName, formData.lastName]);
 
   const formik = useFormik({
     initialValues,
     validationSchema: Yup.object({
       birthdate: Yup.date()
-        .nullable() // تأكد من أنه يمكن أن يكون فارغًا بدون خطأ
+        .max(new Date(), t("Birthdate cannot be in the future")) // تأكد أن التاريخ ليس في المستقبل
         .test("age-check", t("You must be at least 12 years old"), (value) => {
           if (!value) return false; // تأكد من وجود قيمة
           const today = new Date();
           const minDate = new Date();
           minDate.setFullYear(today.getFullYear() - 12);
-          return value <= minDate;
-        })
-        .max(new Date(), t("Date of birth cannot be in the future")),
-
+          return value <= minDate; // يجب أن يكون أصغر من الحد الأدنى وليس مساويًا له
+        }),
       gender: Yup.mixed<"Male" | "Female">()
         .oneOf(["Male", "Female"], t("Invalid Gender"))
         .required(t("Gender Required")),
     }),
     onSubmit: (values) => {
       // Simulate form submission
-      console.log("SignUpForm values:", values);
       const { birthdate, gender } = values;
 
       const sendData = {
@@ -110,7 +105,7 @@ export default function SignUpWithGoogle() {
             <form
               onSubmit={formik.handleSubmit}
               className="mt-8 mb-4 w-full md:w-[85%]">
-              <div className="flex max-sm:flex-col items-center gap-4 mb-4">
+              <div className="flex flex-col gap-4 mb-4">
                 {/* Date of Birth */}
                 <div className="flex flex-col mb-4">
                   <label className="mb-1 font-semibold">
