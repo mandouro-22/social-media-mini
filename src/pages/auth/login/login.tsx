@@ -63,7 +63,7 @@ export default function Login() {
         onError: () => {
           isSubmitting.current = false;
           setLoading(false);
-          toast.success(t("Inccorect email or password"));
+          toast.error(t("Inccorect email or password"));
         },
       });
       console.log("Form submitted");
