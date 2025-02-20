@@ -3,7 +3,7 @@ import logo from "../../assets/imgs/logo.png";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { Button } from "../common";
-import { useState } from "react";
+// import { useState } from "react";
 
 interface SignUpFormValues {
   birthdate: string;
@@ -16,7 +16,7 @@ const initialValues: SignUpFormValues = {
 };
 
 export default function SignUpWithGoogle() {
-  const [loading, setLoading] = useState(false);
+  //   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
 
   const formik = useFormik({
@@ -121,8 +121,8 @@ export default function SignUpWithGoogle() {
                 <Button
                   type="submit"
                   name={t("Sign Up")}
-                  disabled={loading || !formik.isValid}
-                  loading={loading}
+                  //   disabled={loading || !formik.isValid}
+                  //   loading={loading}
                   className="w-full my-4 py-2.5 bg-[#19385c] hover:bg-[#122a46] flex items-center justify-center transition-colors duration-200 text-white rounded-md cursor-pointer"
                 />
               </div>
