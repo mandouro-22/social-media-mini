@@ -4,6 +4,9 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import { Button } from "../common";
 import { useEffect, useState } from "react";
+import { useSignUpGoogle } from "../../hooks";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 // import { useState } from "react";
 
 interface SignUpFormValues {
@@ -23,14 +26,15 @@ const initialValues: SignUpFormValues = {
 };
 
 export default function SignUpWithGoogle() {
-  //   const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
+  const mutation = useSignUpGoogle();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<GetDataFromUseParams>({
     firstName: "",
     lastName: "",
     email: "",
   });
-
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     const email = searchParams.get("email");
@@ -39,9 +43,7 @@ export default function SignUpWithGoogle() {
     if (email && firstName && lastName) {
       setFormData({ firstName: firstName, lastName: lastName, email: email });
     }
-  }, [formData]);
-
-  console.log(formData);
+  }, [formData.email, formData.firstName, formData.lastName]);
 
   const formik = useFormik({
     initialValues,
@@ -64,6 +66,28 @@ export default function SignUpWithGoogle() {
     onSubmit: (values) => {
       // Simulate form submission
       console.log("SignUpForm values:", values);
+      const { birthdate, gender } = values;
+
+      const sendData = {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        birthdate: birthdate,
+        gender: gender,
+      };
+
+      setLoading(true);
+      mutation.mutate(sendData, {
+        onSuccess: () => {
+          setLoading(false);
+          navigate("/");
+          toast.success(t("Account Created Successfully"));
+        },
+        onError: () => {
+          setLoading(false);
+          toast.error(t("Something went wrong"));
+        },
+      });
     },
   });
 
@@ -147,8 +171,8 @@ export default function SignUpWithGoogle() {
                 <Button
                   type="submit"
                   name={t("Sign Up")}
-                  //   disabled={loading || !formik.isValid}
-                  //   loading={loading}
+                  disabled={loading || !formik.isValid}
+                  loading={loading}
                   className="w-full my-4 py-2.5 bg-[#19385c] hover:bg-[#122a46] flex items-center justify-center transition-colors duration-200 text-white rounded-md cursor-pointer"
                 />
               </div>

@@ -9,7 +9,7 @@ export type SignUpValues = {
   birthdate: string;
   gender: "Male" | "Female";
   email: string;
-  password: string;
+  password?: string;
   confirmPassword?: string;
 };
 

@@ -7,7 +7,6 @@
 export default function GoogleLoginButton() {
   // const navigate = useNavigate();
   // const [token, setToken] = useState<string>("");
-  // const { isLoading, isError, error } = useGetInfoWithGoogle(token);
 
   // const signUpUsers = useGoogleLogin({
   //   onSuccess: (tokenResponse) => {

@@ -1,4 +1,4 @@
 import { useSignup } from "./useSignUp/useSignUp";
-import { useGetInfoWithGoogle } from "./useSignUp/useGetInfoWithGoogle";
+import { useSignUpGoogle } from "./useSignUp/useSignUpWithGoogle";
 
-export { useSignup, useGetInfoWithGoogle };
+export { useSignup, useSignUpGoogle };
