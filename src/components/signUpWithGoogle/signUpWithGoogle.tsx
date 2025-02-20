@@ -43,6 +43,8 @@ export default function SignUpWithGoogle() {
     if (email && firstName && lastName) {
       setFormData({ firstName: firstName, lastName: lastName, email: email });
     }
+
+    console.log(formData);
   }, [formData.email, formData.firstName, formData.lastName]);
 
   const formik = useFormik({
