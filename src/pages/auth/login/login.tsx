@@ -60,10 +60,10 @@ export default function Login() {
           localStorage.setItem("user", JSON.stringify(res));
           navigate("/");
         },
-        onError: (error) => {
+        onError: () => {
           isSubmitting.current = false;
           setLoading(false);
-          console.error("Error:", error);
+          toast.success(t("Inccorect email or password"));
         },
       });
       console.log("Form submitted");
