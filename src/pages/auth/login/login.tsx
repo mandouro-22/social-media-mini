@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { useFormik } from "formik";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
-import { Button } from "../../../components/common";
+import { Button, ShowPasswordBtn } from "../../../components/common";
 import logo from "../../../assets/imgs/logo.png";
 import { LoginSchema } from "../../../validation";
 import { LoginValues } from "../../../types/auth";
@@ -16,27 +16,8 @@ export default function Login() {
   const { t } = useTranslation();
   const isSubmitting = useRef(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const navigate = useNavigate();
-
-  // const login = useGoogleLogin({
-  //   scope:
-  //     "openid profile email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/user.birthday.read https://www.googleapis.com/auth/user.gender.read",
-  //   onSuccess: async (tokenResponse) => {
-  //     console.log("Token Response:", tokenResponse);
-
-  //     // طلب بيانات المستخدم من Google People API
-  //     const userProfile = await fetch(
-  //       "https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses,genders,birthdays",
-  //       {
-  //         headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
-  //       }
-  //     );
-
-  //     const userData = await userProfile.json();
-  //     console.log("User Data:", userData);
-  //   },
-  //   onError: (error) => console.error("Login Failed:", error),
-  // });
 
   const initialValues: LoginValues = {
     email: "",
@@ -121,18 +102,24 @@ export default function Login() {
                 <label htmlFor="password" className="text-lg mb-2">
                   {t("Password")}
                 </label>
-                <input
-                  type="password"
-                  id="password"
-                  className={`bg-gray-200 text-black rounded-md p-2.5 text-sm border ${
-                    formik.errors.password && formik.touched.password
-                      ? "border-red-500"
-                      : "border-gray-300"
-                  } outline-0`}
-                  placeholder={t("Password")}
-                  {...formik.getFieldProps("password")}
-                  name="password"
-                />
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    id="password"
+                    className={`w-full bg-gray-200 text-black rounded-md p-2.5 text-sm border ${
+                      formik.errors.password && formik.touched.password
+                        ? "border-red-500"
+                        : "border-gray-300"
+                    } outline-0`}
+                    placeholder={t("Password")}
+                    {...formik.getFieldProps("password")}
+                    name="password"
+                  />
+                  <ShowPasswordBtn
+                    setShowPassword={setShowPassword}
+                    showPassword={showPassword}
+                  />
+                </div>
                 {formik.errors.password && formik.touched.password && (
                   <p className="text-red-500 text-sm mt-1">
                     {formik.errors.password}

@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { useTranslation } from "react-i18next";
 import { ResetPasswordValues } from "../../../types/auth";
 import logo from "../../../assets/imgs/logo.png";
-import { Button } from "../../../components/common";
+import { Button, ShowPasswordBtn } from "../../../components/common";
 import { ResetPasswordSchema } from "../../../validation";
 
 const initialValues: ResetPasswordValues = {
@@ -13,6 +13,9 @@ const initialValues: ResetPasswordValues = {
 
 export default function ResetPassword() {
   const [loading, setLoading] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showConfirmPassword, setShowConfirmPassword] =
+    useState<boolean>(false);
   const { t } = useTranslation();
   const formik = useFormik({
     initialValues,
@@ -51,17 +54,23 @@ export default function ResetPassword() {
                     <label className="mb-1 font-semibold">
                       {t("Password")}
                     </label>
-                    <input
-                      type="password"
-                      className={`bg-gray-200 text-black rounded-md p-2.5 text-sm border ${
-                        formik.errors.password && formik.touched.password
-                          ? "border-red-500"
-                          : "border-gray-300"
-                      } outline-0`}
-                      {...formik.getFieldProps("password")}
-                      name="password"
-                      placeholder={t("Password")}
-                    />
+                    <div className="relative">
+                      <input
+                        type={showPassword ? "text" : "password"}
+                        className={`w-full bg-gray-200 text-black rounded-md p-2.5 text-sm border ${
+                          formik.errors.password && formik.touched.password
+                            ? "border-red-500"
+                            : "border-gray-300"
+                        } outline-0`}
+                        {...formik.getFieldProps("password")}
+                        name="password"
+                        placeholder={t("Password")}
+                      />
+                      <ShowPasswordBtn
+                        setShowPassword={setShowPassword}
+                        showPassword={showPassword}
+                      />
+                    </div>
                     {formik.touched.password && formik.errors.password && (
                       <div className="text-red-500 text-sm">
                         {formik.errors.password}
@@ -72,18 +81,24 @@ export default function ResetPassword() {
                   <label className="mt-3 mb-1 font-semibold">
                     {t("Confirm Password")}
                   </label>
-                  <input
-                    type="password"
-                    className={`bg-gray-200 text-black rounded-md p-2.5 text-sm border ${
-                      formik.errors.confirmPassword &&
-                      formik.touched.confirmPassword
-                        ? "border-red-500"
-                        : "border-gray-300"
-                    } outline-0`}
-                    {...formik.getFieldProps("confirmPassword")}
-                    name="confirmPassword"
-                    placeholder={t("Confirm Password")}
-                  />
+                  <div className="relative">
+                    <input
+                      type={showConfirmPassword ? "text" : "password"}
+                      className={`w-full bg-gray-200 text-black rounded-md p-2.5 text-sm border ${
+                        formik.errors.confirmPassword &&
+                        formik.touched.confirmPassword
+                          ? "border-red-500"
+                          : "border-gray-300"
+                      } outline-0`}
+                      {...formik.getFieldProps("confirmPassword")}
+                      name="confirmPassword"
+                      placeholder={t("Confirm Password")}
+                    />
+                    <ShowPasswordBtn
+                      setShowPassword={setShowConfirmPassword}
+                      showPassword={showConfirmPassword}
+                    />
+                  </div>
                   {formik.touched.confirmPassword &&
                     formik.errors.confirmPassword && (
                       <div className="text-red-500 text-sm">
